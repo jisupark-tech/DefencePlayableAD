@@ -1,0 +1,33 @@
+<linker>
+  <!--
+    NOTE:
+    - link.xml은 '제거/비활성'이 아니라 '보존' 용도입니다.
+    - 용량을 줄이려면 원칙적으로 link.xml을 비워두거나 아예 두지 않는 편이 유리합니다.
+    - 아래는 WebGL/Playable에서 흔히 필요한 최소한만 보존하는 템플릿입니다.
+  -->
+
+  <!-- Unity가 내부적으로 반사/직렬화로 참조할 수 있는 기본 타입들 중 일부만 최소 보존 -->
+  <assembly fullname="UnityEngine.CoreModule">
+    <type fullname="UnityEngine.Object" preserve="nothing" />
+    <type fullname="UnityEngine.Component" preserve="nothing" />
+    <type fullname="UnityEngine.GameObject" preserve="nothing" />
+    <type fullname="UnityEngine.Transform" preserve="nothing" />
+    <type fullname="UnityEngine.MonoBehaviour" preserve="nothing" />
+    <type fullname="UnityEngine.ScriptableObject" preserve="nothing" />
+  </assembly>
+
+  <!-- UI를 쓴다면(UGUI) 필요한 타입이 스트립돼서 이벤트가 죽는 경우가 있어서 최소 보존 -->
+  <assembly fullname="UnityEngine.UI">
+    <type fullname="UnityEngine.UI.Button" preserve="nothing" />
+    <type fullname="UnityEngine.UI.Image" preserve="nothing" />
+    <type fullname="UnityEngine.UI.Text" preserve="nothing" />
+    <type fullname="UnityEngine.UI.CanvasScaler" preserve="nothing" />
+    <type fullname="UnityEngine.UI.GraphicRaycaster" preserve="nothing" />
+  </assembly>
+
+  <!-- EventSystem(클릭/터치) -->
+  <assembly fullname="UnityEngine.InputModule">
+    <type fullname="UnityEngine.EventSystems.EventSystem" preserve="nothing" />
+    <type fullname="UnityEngine.EventSystems.StandaloneInputModule" preserve="nothing" />
+  </assembly>
+</linker>
