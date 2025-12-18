@@ -19,7 +19,8 @@ public class VirtualPad : MonoBehaviour
     public bool useUniversalScaling = true;    // 통합 스케일링 사용
     public float targetSizeInInches = 0.8f;    // 목표 물리적 크기 (인치)
     public bool debugMode = false;             // 디버그 정보 출력
-
+    [Header("OverLay Setting")]
+    public RectTransform OverLayTr;
     [Header("Auto Setup")]
     private RectTransform bgTransform;         // BG 이미지 (흰 원 배경)
     private Vector2 initialPadPosition;        // 패드의 초기 위치
@@ -230,7 +231,7 @@ public class VirtualPad : MonoBehaviour
     {
         // 터치 감지용 투명 오버레이 생성
         touchOverlay = new GameObject("TouchOverlay");
-        touchOverlay.transform.SetParent(parentCanvas.transform, false);
+        touchOverlay.transform.SetParent(OverLayTr!=null? OverLayTr :parentCanvas.transform, false);
 
         // RectTransform 설정 (전체 화면)
         touchOverlayRect = touchOverlay.AddComponent<RectTransform>();
